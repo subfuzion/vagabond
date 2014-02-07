@@ -1,0 +1,39 @@
+{
+  "name": "vagabond",
+  "description": "A simple utility for managing the virtual machine lifecycle",
+  "maintainers": [
+    {
+      "name": "Meadhbh Hamrick",
+      "email": "meadhbh+github@smithee.us",
+      "url": "http://www.smithee.us/"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/smithee-us/vagabond/raw/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smithee-us/vagabond"
+  },
+  "dependencies": {
+    "sn-core": "*",
+    "sn-props": "*",
+    "handlebars": "*"
+  },
+  "bin": {
+    "vagabond": "./bin/vagabond"
+  },
+  "directories": [
+    "bin"
+  ],
+  "version": "0.1.1",
+  "main": "vagabond",
+  "keywords": [
+    "virtual machine",
+    "virtual",
+    "vm"
+  ]
+}

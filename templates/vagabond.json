@@ -1,0 +1,11 @@
+{
+  "name": "{{name}}",
+  "hostname": "{{hostname}}",
+  "addr": "{{addr}}",
+  "ova": "{{ova}}"{{#if user}},
+  "user": {
+    "name": "{{user/name}}"{{#if user/gecos}},
+    "gecos": "{{user/gecos}}"{{/if}}{{#if user/ssh}},
+    "ssh": "{{user/ssh}}"{{/if}}
+  }{{/if}}
+}

@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+var vagabond = require( '../vagabond' );
+var props    = require( 'sn-props' );
+
+var _g;
+
+var valid_commands = {
+  'init': 'init',
+  'create': 'create',
+  'launch': 'launch',
+  'user': 'user',
+  'shutdown': 'shutdown',
+  'destroy': 'destroy',
+  'ip': 'ip'
+};
+
+( new props( { resources: [ 'file://vagabond.json' ] } ) ).read( function( properties ) {
+  _g = properties;
+  _g.commands = _g.commands ? _g.commands : [];
+
+  var commands = process.argv.slice(2)._$fold( function( base, e ) {
+    if( '--' == e.substr( 0, 2 ) ) { return base; }
+    base.push( e );
+    return base;
+  }, _g.commands )
+    ._$fold( function( base, e ) {
+      if( valid_commands[ e ] ) { base.push( valid_commands[ e ] ); }
+      return base;
+    }, [] );
+
+  var inst = new vagabond( _g );
+  _doCommand( -1 );
+
+  function _doCommand( index ) {
+    index++;
+    if( index >= commands.length ) { return; }
+    if( 'function' == typeof inst[ commands[ index ] ] ) {
+      inst[ commands[ index ] ] ( function() {
+        _doCommand._$nextTick( index );
+      } );
+    } else {
+      _doCommand._$nextTick( index );
+    }
+  }
+
+} );
